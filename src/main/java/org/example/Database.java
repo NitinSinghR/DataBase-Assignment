@@ -2,6 +2,7 @@ package org.example;
 
 import java.sql.*;
 import java.util.*;
+import java.util.function.Supplier;
 import java.util.logging.*;
 
 class DataBase{
@@ -19,7 +20,13 @@ class DataBase{
         return t2;
     }
     public void connect(String url, String user, String password) throws SQLException {
+        try{
         con=DriverManager.getConnection(url,user,password);
+        }
+        catch(SQLException e){
+            l.info((Supplier<String>) e);
+        }
+
         l.info("Connection Created Successfully\n");
     }
     public void closeconnection() throws SQLException {
@@ -58,7 +65,7 @@ class DataBase{
                 default:
                 {
                     l.info("Enter the correct option\n");
-                    break;
+                    System.exit(0);
                 }
             }
         }
