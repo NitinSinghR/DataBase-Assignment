@@ -19,7 +19,7 @@ class DataBase{
         }
         return t2;
     }
-    public void connect(String url, String user, String password) throws SQLException {
+    public void connect(String url, String user, String password) {
         try{
         con=DriverManager.getConnection(url,user,password);
         }
