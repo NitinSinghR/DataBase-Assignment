@@ -2,7 +2,6 @@ package org.example;
 
 import java.sql.*;
 import java.util.*;
-import java.util.function.Supplier;
 import java.util.logging.*;
 
 class DataBase{
@@ -24,7 +23,7 @@ class DataBase{
         con=DriverManager.getConnection(url,user,password);
         }
         catch(SQLException e){
-            l.info((Supplier<String>) e);
+            l.info( ""+e);
         }
 
         l.info("Connection Created Successfully\n");
@@ -38,8 +37,7 @@ class DataBase{
         Logger l= Logger.getLogger("com.api.jar");
         Scanner sc=new Scanner(System.in);
 
-        l.info("Enter the Database url");
-        String url=sc.next();
+        String url= ""+"jdbc:mysql://localhost:3306";
         l.info("Enter the username");
         String user=sc.next();
         l.info("Enter the Password");
@@ -50,20 +48,10 @@ class DataBase{
         while(true){
             l.info("1.Create Connection\n2.Close Connection\n");
             int ch=sc.nextInt();
-            switch(ch)
-            {
-                case 1:
-                {
-                    t1.connect(url, user, pass);
-                    break;
-                }
-                case 2:
-                {
-                    t1.closeconnection();
-                    break;
-                }
-                default:
-                {
+            switch (ch) {
+                case 1 -> t1.connect(url, user, pass);
+                case 2 -> t1.closeconnection();
+                default -> {
                     l.info("Enter the correct option\n");
                     System.exit(0);
                 }
